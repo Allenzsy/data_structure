@@ -1,2 +1,2 @@
-# data_structure
-In order to find a job to learn the data structure
+# Algorithms and Data Structures
+对已学习的算法和数据结构进行总结
