@@ -39,4 +39,18 @@ public class SortingTest {
         }
 
     }
+    @Test
+    public void heap_sort() {
+        System.out.println("排序前：");
+        for(int i : A) {
+            System.out.print(i+" ");
+        }
+        System.out.println("");
+        sortingTest.heap_sort(A, A.length);
+        System.out.println("排序后：");
+        for(int i : A) {
+            System.out.print(i+" ");
+        }
+    }
+
 }
