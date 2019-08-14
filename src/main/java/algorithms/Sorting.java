@@ -199,6 +199,47 @@ public class Sorting {
         }
     }
 
+    public void quick_sort(int[] A, int N) {
+        quickSortCore(A, 0, N-1);
+    }
+
+    private void quickSortCore(int[] A, int left, int right) {
+        if(right == left || (right-left) == 1){
+            return;
+        }
+        int pivot = median3(A, left, right);
+        int i = left;
+        int j = right-1;
+        while (true) {
+            while (A[++i] < pivot) {}
+            while (A[--j] > pivot) {}
+            if(i < j) {
+                swap(A, i, j);
+            } else {
+                break;
+            }
+        }
+        swap(A, i, right-1);
+        quickSortCore(A, left, i-1);
+        quickSortCore(A, i+1, right);
+    }
+
+
+    private int median3(int[] A, int left, int right) {
+        int center = (left + right) / 2;
+        if (A[left] > A[center]) {
+            swap(A, left, center);
+        }
+        if (A[left] > A[right]) {
+           swap(A, left, right);
+        }
+        if (A[center] > A[right]) {
+           swap(A, center, right);
+        }
+        swap(A, center, right-1);
+        return A[right-1];
+    }
+
 
 
 

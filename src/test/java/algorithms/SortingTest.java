@@ -53,4 +53,18 @@ public class SortingTest {
         }
     }
 
+    @Test
+    public void quick_sort() {
+        System.out.println("排序前：");
+        for(int i : A) {
+            System.out.print(i+" ");
+        }
+        System.out.println("");
+        sortingTest.quick_sort(A, A.length);
+        System.out.println("排序后：");
+        for(int i : A) {
+            System.out.print(i+" ");
+        }
+    }
+
 }
