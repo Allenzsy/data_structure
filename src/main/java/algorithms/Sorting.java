@@ -108,7 +108,25 @@ public class Sorting {
         A[parent] = temp;
     }
 
+    /**
+     * 递归版本的归并排序
+     * @param A
+     * @param N
+     */
+    public void merge_sort_recursion(int[] A, int N) {
+        int[] tempA = new int[A.length];
+        mSort(A, tempA, 0, N-1);
+    }
 
+    private void mSort (int[] A, int[] tempA, int lStart, int rEnd) {
+        int center;
+        if(lStart < rEnd) {
+            center = (lStart + rEnd) / 2;
+            mSort(A, tempA, lStart, center);
+            mSort(A, tempA, center+1, rEnd);
+            merge(A, tempA, lStart, center+1, rEnd);
+        }
+    }
     private void merge (int[] A, int[] tempA, int lStart, int rStart, int rEnd) {
         int lEnd = rStart - 1;
         int tmp = lStart;
@@ -131,15 +149,59 @@ public class Sorting {
         }
     }
 
-    private void mSort (int[] A, int[] tempA, int lStart, int rEnd) {
-        int center;
-        if(lStart < rEnd) {
-            center = (lStart + rEnd) / 2;
-            mSort(A, tempA, lStart, center);
-            mSort(A, tempA, center+1, rEnd);
-            merge(A, tempA, lStart, center+1, rEnd);
+    /**
+     * 非递归版的归并排序
+     * @param A
+     * @param N
+     */
+    public void merge_sort(int[] A, int N) {
+        int length = 1;
+        int[] tempA = new int[A.length];
+        while(length < N) {
+            merge_pass(A, tempA, N, length);
+            length *= 2;
+            merge_pass(tempA, A, N, length); // 这样无论如何都会将结果倒到A中
+            length *= 2;
         }
     }
+
+    private void merge_pass(int[] A, int[] tempA, int N, int length) { // length是当前有序子列的长度
+        int i;
+        for (i = 0; i < N - 2*length; i+=2*length) {
+            merge1(A, tempA, i, i+length, i+2*length-1);
+        }
+
+        if(i+length < N) {
+            merge1(A, tempA, i, i+length, N-1);
+        } else {
+            for (int j = i; j < N; j++) {
+                tempA[j] = A[j];
+            }
+        }
+    }
+
+    private void merge1 (int[] A, int[] tempA, int lStart, int rStart, int rEnd) {
+        int lEnd = rStart - 1;
+        int tmp = lStart;
+        int numElement = rEnd - lStart + 1;
+        while (lStart <= lEnd && rStart <= rEnd) {
+            if (A[lStart] <= A[rStart]) {
+                tempA[tmp++] = A[lStart++];
+            } else {
+                tempA[tmp++] = A[rStart++];
+            }
+        }
+        while (lStart <= lEnd) {
+            tempA[tmp++] = A[lStart++];
+        }
+        while (rStart <= lEnd) {
+            tempA[tmp++] = A[rStart++];
+        }
+    }
+
+
+
+
 
 
 
