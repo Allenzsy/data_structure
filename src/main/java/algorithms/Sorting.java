@@ -92,11 +92,11 @@ public class Sorting {
      * @param size
      */
     private void percDownMax(int[] A, int pos, int size) {
-        int temp = A[pos];
+        int temp = A[pos]; // 缓存父节点的值
         int parent,child;
         for (parent=pos; (parent*2+1) < size; parent=child) {
-            child = parent*2+1;
-            if ((child < size-1) && (A[child]<A[child+1])) {
+            child = parent*2+1; // 左孩子
+            if ((child < size-1) && (A[child]<A[child+1])) { // 满足前面的条件才能++保证不越界，并找到最大那个
                 child++;
             }
             if (A[child] < temp) {
@@ -105,7 +105,7 @@ public class Sorting {
                 A[parent] = A[child];
             }
         }
-        A[parent] = temp;
+        A[parent] = temp; // 最终的parent是指向了最早父节点值应该在的位置
     }
 
     /**
