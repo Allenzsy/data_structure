@@ -67,4 +67,11 @@ public class SortingTest {
         }
     }
 
+    @Test
+    public void test1() {
+        int i = 1;
+        int a = i++ + (++i + ++i) + ++i;
+        System.out.println(a);
+    }
+
 }
